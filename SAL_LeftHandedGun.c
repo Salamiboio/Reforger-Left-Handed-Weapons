@@ -201,19 +201,6 @@ class SAL_LeftHandedGun: ScriptComponent
 			degrees, distance * 100, accepted);
 	}
 
-	void RecordRackCommand(int commandID, int value)
-	{
-		if (!m_bDebug || (value != 1337 && value != 1338))
-			return;
-
-		m_RackSequence++;
-		m_RackStartMs = GetOwner().GetWorld().GetWorldTime();
-		WeaponComponent weapon = WeaponComponent.Cast(GetOwner().FindComponent(WeaponComponent));
-		RplId weaponId = Replication.FindItemId(weapon);
-		PrintFormat("[SAL LeftHandedGun EVENT] client=%1 weapon=%2 rack=%3 command=%4 value=%5 ms=%6",
-			SCR_PlayerController.GetLocalPlayerId(), weaponId, m_RackSequence, commandID, value, m_RackStartMs);
-	}
-
 	// Sample the animation pose before this frame's visual modifier is submitted.
 	// Same-callback readback does not confirm that the engine applied a modifier.
 	protected void LogFrame(IEntity owner, float timeSlice)
